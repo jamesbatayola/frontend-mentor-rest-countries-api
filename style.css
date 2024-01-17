@@ -70,6 +70,7 @@ main {
 	height: 64.38px;
 	position: absolute;
 	background-color: white;
+	box-shadow: 0px 8px 5px -6px #0000002c;
 }
 /*! -------------- NAV --------------- */
 
@@ -77,9 +78,10 @@ nav {
 	width: 100%;
 	display: flex;
 	padding: 2rem 1rem;
+	align-items: center;
 	background-color: var(--White);
 	justify-content: space-between;
-	align-items: center;
+	box-shadow: 0px 8px 5px -6px #0000002c;
 }
 
 nav h1 {
@@ -155,27 +157,51 @@ nav .dark-mode {
 	transition: 200ms;
 }
 
-.select:hover .select-icon {
+.select.active .select-icon {
 	transform: rotate(0.5turn);
 }
 
 .dropdown {
+	overflow: hidden;
 	left: 0;
-	opacity: 0.1;
+	opacity: 0;
+	z-index: 2;
 	width: 100%;
 	display: grid;
-	gap: 0.5rem;
-	top: 3.3rem;
+	top: 2.5rem;
 	color: black;
-	padding: 1rem;
 	cursor: pointer;
 	position: absolute;
 	border-radius: 0.5rem;
 	pointer-events: none;
 	background-color: white;
+	transition: opacity 200ms, top 200ms;
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
+.dropdown.active {
+	opacity: 1;
+	top: 3.3rem;
+	pointer-events: auto;
+}
+
+.drop {
+	padding: 0 1rem;
+	padding-block: 0.2rem;
+}
+
+.drop:nth-of-type(1) {
+	padding-top: 0.7rem;
+}
+
+.drop:nth-of-type(5) {
+	padding-bottom: 0.7rem;
+}
+
+.drop:hover {
+	background-color: rgba(0, 0, 0, 0.05);
+}
+}
 /*! -------------- DARK MODE --------------- */
 
 .body-theme-change {
