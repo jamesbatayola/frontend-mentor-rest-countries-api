@@ -13,21 +13,6 @@ select.addEventListener("click", () => {
 //! API --------------------------------
 
 const cardContainer = document.querySelector(".cards-container");
-// let data;
-
-// async function initialCard() {
-// 	const fetched = await fetch("data.json");
-// 	const data = await fetched.json();
-// 	console.log(data);
-
-// 	data.forEach((eachData) => {
-// 		const newDiv = document.createElement("div");
-// 		newDiv.classList.add("card");
-// 	});
-// }
-
-// initialCard();
-
 //* REGION
 
 async function getRegion(url) {
@@ -45,7 +30,7 @@ async function getRegion(url) {
 							<div class="card-group">
 								<div class="card-item">
 									<h3 class="data populatoin text">Population:</h3>
-									<p class="text">${eachData.population}</p>
+									<p class="text">${eachData.population.toLocaleString()}</p>
 								</div>
 								<div class="card-item">
 									<h3 class="data region text">Region:</h3>
@@ -62,7 +47,17 @@ async function getRegion(url) {
 		cardContainer.append(newCard);
 
 		//! dark mode for new cards -----------------
-		// checkTheme();
+		const allNewText = document.querySelectorAll(".text");
+		const allNewElement = document.querySelectorAll(".theme-changeable");
+		if (currentTheme === "dark") {
+			allNewText.forEach((eachText) => {
+				eachText.style.color = "white";
+			});
+			allNewElement.forEach((eachElement) => {
+				eachElement.style.backgroundColor = "hsl(209, 23%, 22%)";
+			});
+			body.style.backgroundColor = "hsl(207, 26%, 17%)";
+		}
 	});
 }
 
@@ -83,7 +78,6 @@ let currentTheme = "light";
 
 function checkTheme() {
 	if (currentTheme === "dark") {
-		darkTheme();
 	} else if (currentTheme === "light") {
 		lightTheme();
 	}
