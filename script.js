@@ -78,53 +78,50 @@ dropDownMenu.addEventListener("click", (event) => {
 
 const darkMode = document.querySelector(".dark-mode");
 
-isLight = true;
+let isLight = true;
+let currentTheme = "light";
 
 function checkTheme() {
+	if (currentTheme === "dark") {
+		darkTheme();
+	} else if (currentTheme === "light") {
+		lightTheme();
+	}
+}
+
+function changeTheme() {
 	const allText = document.querySelectorAll(".text");
 	const allElement = document.querySelectorAll(".theme-changeable");
 
 	if (isLight) {
 		isLight = false;
-		allText.forEach((eachText) => {
-			eachText.style.color = "white";
-		});
-		allElement.forEach((eachElement) => {
-			eachElement.style.backgroundColor = "hsl(209, 23%, 22%)";
-		});
-		body.style.backgroundColor = "hsl(207, 26%, 17%)";
+		currentTheme = "dark";
+		darkTheme(allText, allElement);
 	} else {
 		isLight = true;
-		allText.forEach((eachText) => {
-			eachText.style.color = "black";
-		});
-		allElement.forEach((eachElement) => {
-			eachElement.style.backgroundColor = "white";
-		});
-		body.style.backgroundColor = "hsl(0, 0%, 98%)";
+		currentTheme = "light";
+		lightTheme(allText, allElement);
 	}
 }
 
-// function darkTheme() {
-// 	isLight = false;
-// 	allText.forEach((eachText) => {
-// 		eachText.style.color = "white";
-// 	});
-// 	allElement.forEach((eachElement) => {
-// 		eachElement.style.backgroundColor = "hsl(209, 23%, 22%)";
-// 	});
-// 	body.style.backgroundColor = "hsl(207, 26%, 17%)";
-// }
+function darkTheme(texts, backgrounds) {
+	texts.forEach((eachText) => {
+		eachText.style.color = "white";
+	});
+	backgrounds.forEach((eachElement) => {
+		eachElement.style.backgroundColor = "hsl(209, 23%, 22%)";
+	});
+	body.style.backgroundColor = "hsl(207, 26%, 17%)";
+}
 
-// function lightTheme() {
-// 	isLight = true;
-// 	allText.forEach((eachText) => {
-// 		eachText.style.color = "black";
-// 	});
-// 	allElement.forEach((eachElement) => {
-// 		eachElement.style.backgroundColor = "white";
-// 	});
-// 	body.style.backgroundColor = "hsl(0, 0%, 98%)";
-// }
+function lightTheme(texts, backgrounds) {
+	texts.forEach((eachText) => {
+		eachText.style.color = "black";
+	});
+	backgrounds.forEach((eachElement) => {
+		eachElement.style.backgroundColor = "white";
+	});
+	body.style.backgroundColor = "hsl(0, 0%, 98%)";
+}
 
-darkMode.addEventListener("click", checkTheme);
+darkMode.addEventListener("click", changeTheme);
