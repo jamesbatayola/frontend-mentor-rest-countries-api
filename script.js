@@ -1,6 +1,7 @@
 const body = document.body;
 
-//! DROPDOWN --------------------------------
+//! DROPDOWN ====================================================================================
+
 const select = document.querySelector(".select");
 const dropDownMenu = document.querySelector(".dropdown");
 const dropDownItems = document.querySelectorAll(".drop");
@@ -10,15 +11,15 @@ select.addEventListener("click", () => {
 	dropDownMenu.classList.toggle("active");
 });
 
-//! API --------------------------------
+//! API ====================================================================================
 
 const cardContainer = document.querySelector(".cards-container");
-//* REGION
+
+//? REGION -----------------------------
 
 async function getRegion(url) {
 	const link = await fetch(url);
 	data = await link.json();
-	console.log(data);
 
 	data.forEach((eachData) => {
 		const newCard = document.createElement("div");
@@ -41,23 +42,15 @@ async function getRegion(url) {
 									<p class="text">${eachData.capital[0]}</p>
 								</div>
 							</div>
-						</div>
-					
+						</div>	
 		`;
 		cardContainer.append(newCard);
 
-		//! dark mode for new cards -----------------
+		//* dark mode for new cards -----------------
+
 		const allNewText = document.querySelectorAll(".text");
 		const allNewElement = document.querySelectorAll(".theme-changeable");
-		if (currentTheme === "dark") {
-			allNewText.forEach((eachText) => {
-				eachText.style.color = "white";
-			});
-			allNewElement.forEach((eachElement) => {
-				eachElement.style.backgroundColor = "hsl(209, 23%, 22%)";
-			});
-			body.style.backgroundColor = "hsl(207, 26%, 17%)";
-		}
+		checkTheme(allNewText, allNewElement);
 	});
 }
 
@@ -69,17 +62,30 @@ dropDownMenu.addEventListener("click", (event) => {
 	getRegion(url);
 });
 
-//! Dark Mode --------------------------------
+//? SEARCH -----------------------------
+
+const searchInput = document.querySelector(".search-input");
+
+async function getName() {
+	const url = `https://restcountries.com/v3.1/name/${asd}?fullText=true`;
+}
+
+//! Dark Mode ====================================================================================
 
 const darkMode = document.querySelector(".dark-mode");
 
 let isLight = true;
 let currentTheme = "light";
 
-function checkTheme() {
+function checkTheme(allNewText, allNewElement) {
 	if (currentTheme === "dark") {
-	} else if (currentTheme === "light") {
-		lightTheme();
+		allNewText.forEach((eachText) => {
+			eachText.style.color = "white";
+		});
+		allNewElement.forEach((eachElement) => {
+			eachElement.style.backgroundColor = "hsl(209, 23%, 22%)";
+		});
+		body.style.backgroundColor = "hsl(207, 26%, 17%)";
 	}
 }
 
