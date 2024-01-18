@@ -59,7 +59,7 @@ button {
 }
 
 main {
-	padding: 1rem;
+	padding: 1.5rem 1rem;
 }
 
 .header-background {
@@ -161,7 +161,7 @@ nav .dark-mode {
 	width: 60%;
 	display: flex;
 	min-width: 160px;
-	max-width: 40%;
+	max-width: 55%;
 	padding: 0.9rem;
 	cursor: pointer;
 	position: relative;
@@ -291,7 +291,7 @@ nav .dark-mode {
 @media screen and (min-width: 375px) {
 	.cards-container {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
 	}
 }
 
@@ -324,7 +324,6 @@ nav .dark-mode {
 	main {
 		padding-inline: 0;
 		padding-bottom: 0;
-
 		margin-inline: auto;
 	}
 
@@ -332,8 +331,6 @@ nav .dark-mode {
 		gap: 4rem;
 		padding-top: 2rem;
 		padding-inline: 0;
-		/* max-width: 1300px; */
-		/* margin-inline: 4rem; */
 	}
 
 	.search-nav {

@@ -54,6 +54,7 @@ async function getRegion(url) {
 	data = await link.json();
 
 	data.forEach((eachData) => {
+		console.log(eachData);
 		cardCreator(eachData);
 	});
 }
@@ -76,6 +77,7 @@ async function getName() {
 		searchInput.placeholder = "Please enter a country name";
 		searchInput.classList.add("active");
 	} else {
+		cardContainer.innerHTML = "";
 		searchName();
 	}
 }
@@ -83,7 +85,9 @@ async function getName() {
 async function searchName() {
 	const link = await fetch(`https://restcountries.com/v3.1/name/${searchInput.value}?fullText=true`);
 	const data = await link.json();
-	console.log(data);
+	const country = await data[0];
+	console.log(country);
+	cardCreator(country);
 }
 
 searchIcon.addEventListener("click", getName);
