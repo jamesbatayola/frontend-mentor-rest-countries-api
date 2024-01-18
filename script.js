@@ -17,40 +17,44 @@ const cardContainer = document.querySelector(".cards-container");
 
 //? REGION -----------------------------
 
+function cardCreator(eachCard) {
+	const newCard = document.createElement("div");
+	newCard.classList.add("card", "theme-changeable");
+	newCard.innerHTML = `		           
+						<img class="card-flag" src="${eachCard.flags.png}" alt="${eachCard.flags.alt}" />
+						<div class="card-info">
+							<h2 class="card-name text">${eachCard.name.common}</h2>
+							<div class="card-group">
+								<div class="card-item">
+									<h3 class="data populatoin text">Population:</h3>
+									<p class="text">${eachCard.population.toLocaleString()}</p>
+								</div>
+								<div class="card-item">
+									<h3 class="data region text">Region:</h3>
+									<p class="text">${eachCard.region}</p>
+								</div>
+								<div class="card-item">
+									<h3 class="data capital text">Capital:</h3>
+									<p class="text">${eachCard.capital[0]}</p>
+								</div>
+							</div>
+						</div>	
+		`;
+	cardContainer.append(newCard);
+
+	// //* dark mode for new cards -----------------
+
+	const allNewText = document.querySelectorAll(".text");
+	const allNewElement = document.querySelectorAll(".theme-changeable");
+	checkTheme(allNewText, allNewElement);
+}
+
 async function getRegion(url) {
 	const link = await fetch(url);
 	data = await link.json();
 
 	data.forEach((eachData) => {
-		const newCard = document.createElement("div");
-		newCard.classList.add("card", "theme-changeable");
-		newCard.innerHTML = `		           
-						<img class="card-flag" src="${eachData.flags.png}" alt="${eachData.flags.alt}" />
-						<div class="card-info">
-							<h2 class="card-name text">${eachData.name.common}</h2>
-							<div class="card-group">
-								<div class="card-item">
-									<h3 class="data populatoin text">Population:</h3>
-									<p class="text">${eachData.population.toLocaleString()}</p>
-								</div>
-								<div class="card-item">
-									<h3 class="data region text">Region:</h3>
-									<p class="text">${eachData.region}</p>
-								</div>
-								<div class="card-item">
-									<h3 class="data capital text">Capital:</h3>
-									<p class="text">${eachData.capital[0]}</p>
-								</div>
-							</div>
-						</div>	
-		`;
-		cardContainer.append(newCard);
-
-		//* dark mode for new cards -----------------
-
-		const allNewText = document.querySelectorAll(".text");
-		const allNewElement = document.querySelectorAll(".theme-changeable");
-		checkTheme(allNewText, allNewElement);
+		cardCreator(eachData);
 	});
 }
 
@@ -65,10 +69,24 @@ dropDownMenu.addEventListener("click", (event) => {
 //? SEARCH -----------------------------
 
 const searchInput = document.querySelector(".search-input");
+const searchIcon = document.querySelector(".search-icon");
 
 async function getName() {
-	const url = `https://restcountries.com/v3.1/name/${asd}?fullText=true`;
+	if (searchInput.value === "") {
+		searchInput.placeholder = "Please enter a country name";
+		searchInput.classList.add("active");
+	} else {
+		searchName();
+	}
 }
+
+async function searchName() {
+	const link = await fetch(`https://restcountries.com/v3.1/name/${searchInput.value}?fullText=true`);
+	const data = await link.json();
+	console.log(data);
+}
+
+searchIcon.addEventListener("click", getName);
 
 //! Dark Mode ====================================================================================
 
