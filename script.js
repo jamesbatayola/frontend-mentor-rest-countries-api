@@ -15,11 +15,33 @@ select.addEventListener("click", () => {
 
 const cardContainer = document.querySelector(".cards-container");
 
-//? REGION -----------------------------
+//? CARD MAKER -----------------------------
+
+function addData(element, newCard) {
+	const currencyRef = Object.keys(element.currencies);
+	const languageRef = Object.keys(element.languages);
+	const countryCurrency = element.currencies[currencyRef[0]].name;
+	const countryNativeName = element.name && element.name.nativeName ? element.name.nativeName[languageRef[0]].common : "N / A";
+	const countryLanguage = element.languages[languageRef[0]];
+	console.log(countryLanguage);
+	// ! ---------------------
+	const newNativeName = countryNativeName,
+		newSubRegion = `${element.subregion}`,
+		newTopDomain = `${element.tld[0]}`,
+		newCurrency = countryCurrency,
+		newLanguage = countryLanguage;
+	// ! ---------------------
+	newCard.setAttribute("data-nativeName", newNativeName);
+	newCard.setAttribute("data-subRegion", newSubRegion);
+	newCard.setAttribute("data-topDomain", newTopDomain);
+	newCard.setAttribute("data-currency", newCurrency);
+	newCard.setAttribute("data-language", newLanguage);
+}
 
 function cardCreator(eachCard) {
 	const newCard = document.createElement("div");
 	newCard.classList.add("card", "theme-changeable");
+	addData(eachCard, newCard);
 	newCard.innerHTML = `		           
 						<img class="card-flag" src="${eachCard.flags.png}" alt="${eachCard.flags.alt}" />
 						<div class="card-info">
@@ -49,12 +71,13 @@ function cardCreator(eachCard) {
 	checkTheme(allNewText, allNewElement);
 }
 
+//? GET CARD BY REGION -----------------------------
+
 async function getRegion(url) {
 	const link = await fetch(url);
 	data = await link.json();
 
 	data.forEach((eachData) => {
-		console.log(eachData);
 		cardCreator(eachData);
 	});
 }
@@ -67,7 +90,7 @@ dropDownMenu.addEventListener("click", (event) => {
 	getRegion(url);
 });
 
-//? SEARCH -----------------------------
+//? GET CARDS BY SEARCH -----------------------------
 
 const searchInput = document.querySelector(".search-input");
 const searchIcon = document.querySelector(".search-icon");
