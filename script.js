@@ -1,6 +1,6 @@
 const body = document.body;
 
-//! DROPDOWN ====================================================================================
+//! DROPDOWN ===============================================================================
 
 const select = document.querySelector(".select");
 const dropDownMenu = document.querySelector(".dropdown");
@@ -18,18 +18,19 @@ const cardContainer = document.querySelector(".cards-container");
 //? CARD MAKER -----------------------------
 
 function addData(element, newCard) {
-	const currencyRef = Object.keys(element.currencies);
 	const languageRef = Object.keys(element.languages);
+	const currencyRef = Object.keys(element.currencies);
 	const countryCurrency = element.currencies[currencyRef[0]].name;
 	const countryNativeName = element.name && element.name.nativeName ? element.name.nativeName[languageRef[0]].common : "N / A";
-	const countryLanguage = element.languages[languageRef[0]];
-	console.log(countryLanguage);
+	const languageList = languageRef.map((each) => {
+		return element.languages[each];
+	});
 	// ! ---------------------
 	const newNativeName = countryNativeName,
 		newSubRegion = `${element.subregion}`,
 		newTopDomain = `${element.tld[0]}`,
 		newCurrency = countryCurrency,
-		newLanguage = countryLanguage;
+		newLanguage = languageList.join(" ");
 	// ! ---------------------
 	newCard.setAttribute("data-nativeName", newNativeName);
 	newCard.setAttribute("data-subRegion", newSubRegion);
