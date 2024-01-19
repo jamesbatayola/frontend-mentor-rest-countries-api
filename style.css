@@ -78,7 +78,7 @@ main {
 nav {
 	width: 100%;
 	display: flex;
-	padding: 2rem 1rem;
+	padding: 1.7rem 1rem;
 	align-items: center;
 	background-color: var(--White);
 	justify-content: space-between;
@@ -370,24 +370,25 @@ nav .dark-mode {
 /*! -------------- CARD PREVIEW --------------- */
 
 .back-button {
-	border: 1px solid black;
-	display: flex;
-	justify-content: center;
-	gap: 0.5rem;
-	align-items: center;
-	background-color: white;
 	width: 30%;
+	gap: 0.5rem;
+	border: none;
+	display: flex;
+	cursor: pointer;
 	padding: 0.3rem ;
 	border-radius: 3px;
-	border: none;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1.5rem;
+	background-color: white;
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
 
 .card-preview {
+	gap: 2.2rem;
 	display: grid;
-	gap: 3.5rem;
+	padding: 2.2rem 1.5rem; 
 	border: 1px solid black;
-	padding: 1rem 0.5rem; 
 }
 
 .preview-main-container {
@@ -402,17 +403,17 @@ nav .dark-mode {
 .preview-flag {
 	min-height: 250px;
 	max-height: 250px;
+	margin-bottom: 0.8rem;
 }
 
 .card-details-container {
+	gap: 2.5rem;
 	display: grid;
-	gap: 2rem;
 }
 
 .card-details-top {
 	display: grid;
-	gap: 1rem;
-	margin-bottom: 0.5rem;
+	gap: 1.5rem;
 }
 
 .card-details-bottom {
@@ -431,20 +432,20 @@ nav .dark-mode {
 }
 
 .card-details-footer {
-	display: grid;
 	gap: 1rem;
+	display: grid;
 }
 
 .footer-heading {
-	font-size: 1.1rem;
 	font-weight: 600;
+	font-size: 1.1rem;
 }
 
 .borders-container {
 	width: 97%;
+	gap: 0.7rem;
 	display: flex;
 	justify-content: center;
-	gap: 0.7rem;
 }
 
 .borders-item {

@@ -42,7 +42,7 @@ function cardCreator(eachCard) {
 						</div>	
 		`;
 	cardContainer.append(newCard);
-
+	newCard.addEventListener("click");
 	// //* dark mode for new cards -----------------
 
 	const allNewText = document.querySelectorAll(".text");
@@ -54,7 +54,7 @@ function addData(element, newCard) {
 	const languageRef = Object.keys(element.languages);
 	const currencyRef = Object.keys(element.currencies);
 	const countryCurrency = element.currencies[currencyRef[0]].name;
-	const countryNativeName = element.name && element.name.nativeName ? element.name.nativeName[languageRef[0]].common : "N / A";
+	const countryNativeName = element.name.nativeName[languageRef[0]].common;
 	const languageList = languageRef.map((each) => {
 		return element.languages[each];
 	});
@@ -128,76 +128,76 @@ const container = document.querySelector(".container");
 const main = document.querySelector("main");
 
 //? Creating a preview card
+function previewCard(everyCard) {
+	everyCard.forEach((eachCard) => {
+		eachCard.addEventListener("click", () => {
+			main.style.display = "none";
+			const cardPreview = document.createElement("div");
+			cardPreview.classList.add("card-preview");
 
-cards.forEach((eachCard) => {
-	eachCard.addEventListener("click", () => {
-		console.log(eachCard);
-		main.style.display = "none";
-		const cardPreview = document.createElement("div");
-		cardPreview.classList.add("card-preview");
-		cardPreview.innerHTML = `
-	<div class="card-preview">
-	<div class="back-button">
-		<i class="text fa-solid fa-arrow-left-long"></i>
-		<p class="text">Back</p>
-	</div>
-	<section class="preview-main-container">
-		<img class="card-flag preview-flag" src="https://flagcdn.com/w320/de.png" alt="" />
-		<section class="card-details-container">
-			<article class="card-details-top">
-				<h2 class="text card-preview-name">Belgium</h2>
-				<div class="card-details-top-group">
-					<div class="details-item">
-						<h3 class="data text native-name">Native Name:</h3>
-						<p class="text">Belgie</p>
-					</div>
-					<div class="details-item">
-						<h3 class="data text population">Population:</h3>
-						<p class="text">11,319,511</p>
-					</div>
-					<div class="details-item">
-						<h3 class="data text region">Region:</h3>
-						<p class="text">Europe</p>
-					</div>
-					<div class="details-item">
-						<h3 class="data text sub-region">Sub Region:</h3>
-						<p class="text">Western Europe</p>
-					</div>
-					<div class="details-item">
-						<h3 class="data text capital">Capital:</h3>
-						<p class="text">Brussels</p>
-					</div>
-				</div>
-			</article>
-			<article class="card-details-bottom">
-				<div class="details-item">
-					<h3 class="data text tld">Top Level Domain:</h3>
-					<p class="text">.be</p>
-				</div>
-				<div class="details-item">
-					<h3 class="data text currencies">Currencies:</h3>
-					<p class="text">Euro</p>
-				</div>
-				<div class="details-item">
-					<h3 class="data text language">Languages:</h3>
-					<p class="text">Dutch, French, German</p>
-				</div>
-			</article>
-			<footer class="card-details-footer">
-				<h2 class="footer-heading">Border Countries:</h2>
-				<div class="borders-container">
-					<div class="borders-item border-1">France</div>
-					<div class="borders-item border-2">Germany</div>
-					<div class="borders-item border-3">Netherlands</div>
-				</div>
-			</footer>
-		</section>
-	</section>
-</div>
-`;
-		container.append(cardPreview);
+			cardPreview.innerHTML = `								 					
+								<div class="back-button theme-changeable">
+									<i class="text fa-solid fa-arrow-left-long"></i>
+									<p class="text">Back</p>
+								</div
+								<section class="preview-main-container">
+									<img class="card-flag preview-flag" src="${eachCard.firstElementChild.currentSrc}" alt="" />
+									<section class="card-details-container">
+										<article class="card-details-top">
+											<h2 class="text card-preview-name">Germay</h2>
+											<div class="card-details-top-group">
+												<div class="details-item">
+													<h3 class="data text native-name">Native Name:</h3>
+													<p class="text">${eachCard.dataset.nativename}</p>
+												</div>
+												<div class="details-item">
+													<h3 class="data text population">Population:</h3>
+													<p class="text">${eachCard.lastElementChild.lastElementChild.firstElementChild.lastElementChild.innerText}</p>
+												</div>
+												<div class="details-item">
+													<h3 class="data text region">Region:</h3>
+													<p class="text">${eachCard.lastElementChild.lastElementChild.children[1].lastElementChild.innerText}</p>
+												</div>
+												<div class="details-item">
+													<h3 class="data text sub-region">Sub Region:</h3>
+													<p class="text">${eachCard.dataset.subregion}</p>
+												</div>
+												<div class="details-item">
+													<h3 class="data text capital">Capital:</h3>
+													<p class="text">${eachCard.lastElementChild.lastElementChild.children[2].lastElementChild.innerText}</p>
+												</div>
+											</div>
+										</article>
+										<article class="card-details-bottom">
+											<div class="details-item">
+												<h3 class="data text tld">Top Level Domain:</h3>
+												<p class="text">${eachCard.dataset.topdomain}</p>
+											</div>
+											<div class="details-item">
+												<h3 class="data text currencies">Currencies:</h3>
+												<p class="text">${eachCard.dataset.currency}</p>
+											</div>
+											<div class="details-item">
+												<h3 class="data text language">Languages:</h3>
+												<p class="text">${eachCard.dataset.language}</p>
+											</div>
+										</article>
+										<footer class="card-details-footer">
+											<h2 class="footer-heading text">Border Countries:</h2>
+											<div class="borders-container">
+												<div class="borders-item border-1 theme-changeable"><p class="text">France</p></div>
+												<div class="borders-item border-2 theme-changeable"><p class="text">Germany</p></div>
+												<div class="borders-item border-3 theme-changeable"><p class="text">Netherlands</p></div>
+											</div>
+										</footer>
+									</section>
+								</section>
+							
+			`;
+			container.append(cardPreview);
+		});
 	});
-});
+}
 
 //! Dark Mode ====================================================================================
 
