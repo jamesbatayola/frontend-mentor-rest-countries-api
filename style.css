@@ -388,7 +388,6 @@ nav .dark-mode {
 	gap: 2.2rem;
 	display: grid;
 	padding: 2.2rem 1.5rem; 
-	border: 1px solid black;
 }
 
 .preview-main-container {

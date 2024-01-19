@@ -42,7 +42,8 @@ function cardCreator(eachCard) {
 						</div>	
 		`;
 	cardContainer.append(newCard);
-	newCard.addEventListener("click");
+	newCard.addEventListener("click", previewCard(newCard));
+
 	// //* dark mode for new cards -----------------
 
 	const allNewText = document.querySelectorAll(".text");
@@ -50,13 +51,24 @@ function cardCreator(eachCard) {
 	checkTheme(allNewText, allNewElement);
 }
 
+// ? DATA ADDER -----------------------------
+
 function addData(element, newCard) {
+	let countryBorder = [];
+	const bordersRef = element.borders ? Object.keys(element.borders) : "N / A";
+	// if (element.borders) {
+	// 	countryBorder = bordersRef.map((eachBorder) => {
+	// 		return element.borders[eachBorder];
+	// 	});
+	// } else {
+	// 	return "n / a";
+	// }
 	const languageRef = Object.keys(element.languages);
 	const currencyRef = Object.keys(element.currencies);
 	const countryCurrency = element.currencies[currencyRef[0]].name;
 	const countryNativeName = element.name.nativeName[languageRef[0]].common;
-	const languageList = languageRef.map((each) => {
-		return element.languages[each];
+	const languageList = languageRef.map((eachLanguage) => {
+		return element.languages[eachLanguage];
 	});
 
 	// ! ---------------------
@@ -65,8 +77,8 @@ function addData(element, newCard) {
 		newSubRegion = `${element.subregion}`,
 		newTopDomain = `${element.tld[0]}`,
 		newCurrency = countryCurrency,
-		newLanguage = languageList.join(" ");
-
+		newLanguage = languageList.join(" "),
+		newBorders = countryBorder;
 	// ! ---------------------
 
 	newCard.setAttribute("data-nativeName", newNativeName);
@@ -74,6 +86,7 @@ function addData(element, newCard) {
 	newCard.setAttribute("data-topDomain", newTopDomain);
 	newCard.setAttribute("data-currency", newCurrency);
 	newCard.setAttribute("data-language", newLanguage);
+	newCard.setAttribute("data-borders", newBorders);
 }
 
 //? GET CARD BY REGION -----------------------------
@@ -127,15 +140,15 @@ const cards = document.querySelectorAll(".card");
 const container = document.querySelector(".container");
 const main = document.querySelector("main");
 
-//? Creating a preview card
-function previewCard(everyCard) {
-	everyCard.forEach((eachCard) => {
-		eachCard.addEventListener("click", () => {
-			main.style.display = "none";
-			const cardPreview = document.createElement("div");
-			cardPreview.classList.add("card-preview");
+//? Creating a preview card ----------------------------------
 
-			cardPreview.innerHTML = `								 					
+function previewCard(eachCard) {
+	eachCard.addEventListener("click", () => {
+		console.dir(eachCard);
+		main.style.display = "none";
+		const cardPreview = document.createElement("div");
+		cardPreview.classList.add("card-preview");
+		cardPreview.innerHTML = `								 					
 								<div class="back-button theme-changeable">
 									<i class="text fa-solid fa-arrow-left-long"></i>
 									<p class="text">Back</p>
@@ -144,7 +157,7 @@ function previewCard(everyCard) {
 									<img class="card-flag preview-flag" src="${eachCard.firstElementChild.currentSrc}" alt="" />
 									<section class="card-details-container">
 										<article class="card-details-top">
-											<h2 class="text card-preview-name">Germay</h2>
+											<h2 class="text card-preview-name">${eachCard.lastElementChild.firstElementChild.innerText}</h2>
 											<div class="card-details-top-group">
 												<div class="details-item">
 													<h3 class="data text native-name">Native Name:</h3>
@@ -185,19 +198,29 @@ function previewCard(everyCard) {
 										<footer class="card-details-footer">
 											<h2 class="footer-heading text">Border Countries:</h2>
 											<div class="borders-container">
-												<div class="borders-item border-1 theme-changeable"><p class="text">France</p></div>
-												<div class="borders-item border-2 theme-changeable"><p class="text">Germany</p></div>
-												<div class="borders-item border-3 theme-changeable"><p class="text">Netherlands</p></div>
+												<div class="borders-item border-1 theme-changeable"><p class="text">UNFINISHED</p></div>
+												<div class="borders-item border-2 theme-changeable"><p class="text">UNFINISHED</p></div>
+												<div class="borders-item border-3 theme-changeable"><p class="text">UNFINISHED</p></div>
 											</div>
 										</footer>
 									</section>
 								</section>
 							
 			`;
-			container.append(cardPreview);
-		});
+		const bordersContainer = document.querySelector(".border-container");
+		container.append(cardPreview);
+
+		// //* dark mode for new cards -----------------
+
+		const allNewerText = document.querySelectorAll(".text");
+		const allNewerElement = document.querySelectorAll(".theme-changeable");
+		checkTheme(allNewerText, allNewerElement);
 	});
 }
+
+cards.forEach((eachCard) => {
+	eachCard.addEventListener("click", previewCard(eachCard));
+});
 
 //! Dark Mode ====================================================================================
 
