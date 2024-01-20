@@ -124,7 +124,18 @@ async function searchName() {
 	cardCreator(country);
 }
 
+function enter(event) {
+	if (event.code === "Enter") {
+		if (searchInput.value !== "") getName();
+		else {
+			searchInput.placeholder = "Please enter a country name";
+			searchInput.classList.add("active");
+		}
+	}
+}
+
 searchIcon.addEventListener("click", getName);
+searchInput.addEventListener("keydown", enter);
 
 //! PREVIEW CARD =================================================================================
 
@@ -191,9 +202,9 @@ function previewCard(eachCard) {
 										<footer class="card-details-footer">
 											<h2 class="footer-heading text">Border Countries:</h2>
 											<div class="borders-container">
-												<div class="borders-item border-1 theme-changeable"><p class="text">UNFINISHED</p></div>
-												<div class="borders-item border-2 theme-changeable"><p class="text">UNFINISHED</p></div>
-												<div class="borders-item border-3 theme-changeable"><p class="text">UNFINISHED</p></div>
+												<div class="borders-item border-1 theme-changeable"><p class="text">N / A</p></div>
+												<div class="borders-item border-2 theme-changeable"><p class="text">N / A</p></div>
+												<div class="borders-item border-3 theme-changeable"><p class="text">N / A</p></div>
 											</div>
 										</footer>
 									</section>
@@ -269,6 +280,7 @@ function darkTheme(texts, backgrounds) {
 		eachElement.style.backgroundColor = "hsl(209, 23%, 22%)";
 	});
 	body.style.backgroundColor = "hsl(207, 26%, 17%)";
+	searchInput.style.color = "white";
 }
 
 function lightTheme(texts, backgrounds) {
@@ -279,6 +291,7 @@ function lightTheme(texts, backgrounds) {
 		eachElement.style.backgroundColor = "white";
 	});
 	body.style.backgroundColor = "hsl(0, 0%, 98%)";
+	searchInput.style.color = "black";
 }
 
 darkMode.addEventListener("click", changeTheme);

@@ -50,25 +50,25 @@ button {
 
 /*! -------------- CONTAINER --------------- */
 .container {
-	min-height: 100svh;
 	width: 100%;
+	min-height: 100svh;
 	min-width: 285px;
 	max-width: 1300px;
 	background-color: inherit;
-	/* background-color: var(--Very-Light-Gray); */
 }
 
 main {
-	/* display: none; */
 	padding: 1.5rem 1rem;
 }
 
 .header-background {
 	top: 0;
 	left: 0;
+	z-index: 5;
 	width: 100%;
 	display: none;
 	height: 64.38px;
+	/* isolation: isolate; */
 	position: absolute;
 	background-color: white;
 	box-shadow: 0px 8px 5px -6px #0000002c;
@@ -146,16 +146,17 @@ nav .dark-mode {
 }
 
 .search-icon {
-	top: 1rem;
-	left: 1.5rem;
+	top: 0.8rem;
+	left: 1.2rem;
 	cursor: pointer;
-	transition: 500m;
+	padding: 0.25rem;
+	transition: transform 100ms;
 	position: absolute;
 	color: rgba(128, 128, 128, 0.5);
 }
 
 .search-icon:hover {
-	transform: scale(1.2);
+	transform: scale(1.3);
 }
 
 .select {
@@ -302,6 +303,8 @@ nav .dark-mode {
 	}
 }
 
+
+
 @media screen and (min-width: 1300px) {
 	body {
 		min-height: 100vh;
@@ -311,10 +314,10 @@ nav .dark-mode {
 	}
 
 	nav {
-		/* z-index: 1; */
+		pointer-events: auto;
 		padding-inline: 0;
 		padding-block: 1.2rem;
-		/* background-color: transparent; */
+		box-shadow: none;
 	}
 
 	nav h1 {
@@ -322,10 +325,11 @@ nav .dark-mode {
 	}
 
 	.container {
+		z-index: 1;
+		pointer-events: auto;
 		min-height: 100vh;
 		max-width: 100vw;
 		max-width: 1300px;
-		/* margin-inline: 1.5rem; */
 	}
 
 	main {
@@ -356,8 +360,8 @@ nav .dark-mode {
 
 	.search-icon {
 		position: absolute;
-		top: 2rem;
-		left: 1.5rem;
+		top: 1.8rem;
+		left: 1.25rem;
 	}
 
 	.header-background {
@@ -379,7 +383,7 @@ nav .dark-mode {
 	border-radius: 3px;
 	align-items: center;
 	justify-content: center;
-	margin-bottom: 1.5rem;
+	margin-bottom: 1rem;
 	background-color: white;
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
@@ -401,7 +405,7 @@ nav .dark-mode {
 
 .preview-flag {
 	min-height: 250px;
-	max-height: 250px;
+	max-height: 350px;
 	margin-bottom: 0.8rem;
 }
 
@@ -422,11 +426,13 @@ nav .dark-mode {
 .card-details-top-group,
 .card-details-bottom {
 	display: grid;
+	align-content: end;
 	gap: 0.3rem;
 }
 
 .details-item {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 0.3rem;
 }
 
@@ -443,8 +449,8 @@ nav .dark-mode {
 .borders-container {
 	width: 97%;
 	gap: 0.7rem;
-	display: flex;
-	justify-content: center;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 }
 
 .borders-item {
@@ -456,3 +462,41 @@ nav .dark-mode {
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3)
 }
 
+@media screen and (min-width: 596px) {
+	.card-details-container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr;
+		grid-template-areas: "top1 top2" "bottom bottom";
+	}
+
+	.card-details-bottom {
+		display: grid;
+		gap: 0.3rem;
+	}
+
+	.card-details-footer {
+		grid-area: bottom;
+	}
+}
+
+@media screen and (min-width: 964px) {
+	.card-preview {
+		margin-top: 1.5rem;
+		grid-template-columns: 1fr 1.3fr;
+		grid-template-rows: 50px 1fr;
+		grid-template-areas: "button button" "flag info";
+	}
+
+	.card-details-container {
+		gap: 3.5rem;
+		grid-area: info;
+		align-content: center;
+		margin-left: 3.5rem;
+	}
+
+	.preview-flag {
+		grid-area: flag;
+		min-height: 100%;
+	}
+}
