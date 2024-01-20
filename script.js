@@ -56,13 +56,6 @@ function cardCreator(eachCard) {
 function addData(element, newCard) {
 	let countryBorder = [];
 	const bordersRef = element.borders ? Object.keys(element.borders) : "N / A";
-	// if (element.borders) {
-	// 	countryBorder = bordersRef.map((eachBorder) => {
-	// 		return element.borders[eachBorder];
-	// 	});
-	// } else {
-	// 	return "n / a";
-	// }
 	const languageRef = Object.keys(element.languages);
 	const currencyRef = Object.keys(element.currencies);
 	const countryCurrency = element.currencies[currencyRef[0]].name;
@@ -136,8 +129,8 @@ searchIcon.addEventListener("click", getName);
 //! PREVIEW CARD =================================================================================
 
 const searchNav = document.querySelector(".search-nav");
-const cards = document.querySelectorAll(".card");
 const container = document.querySelector(".container");
+const cards = document.querySelectorAll(".card");
 const main = document.querySelector("main");
 
 //? Creating a preview card ----------------------------------
@@ -207,8 +200,11 @@ function previewCard(eachCard) {
 								</section>
 							
 			`;
-		const bordersContainer = document.querySelector(".border-container");
+
 		container.append(cardPreview);
+		const currentCard = document.querySelector(".card-preview");
+		const backButton = document.querySelector(".back-button");
+		back(backButton, currentCard);
 
 		// //* dark mode for new cards -----------------
 
@@ -221,6 +217,15 @@ function previewCard(eachCard) {
 cards.forEach((eachCard) => {
 	eachCard.addEventListener("click", previewCard(eachCard));
 });
+
+//? Creating a back button ----------------------------------
+
+function back(button, currentContainer) {
+	button.addEventListener("click", () => {
+		main.style.display = "block";
+		container.removeChild(currentContainer);
+	});
+}
 
 //! Dark Mode ====================================================================================
 
