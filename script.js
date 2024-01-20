@@ -1,6 +1,6 @@
 const body = document.body;
 
-//! DROPDOWN ===============================================================================
+//! DROPDOWN ========================================================
 
 const select = document.querySelector(".select");
 const dropDownMenu = document.querySelector(".dropdown");
@@ -11,7 +11,7 @@ select.addEventListener("click", () => {
 	dropDownMenu.classList.toggle("active");
 });
 
-//! API ====================================================================================
+//! API =============================================================
 
 const cardContainer = document.querySelector(".cards-container");
 
@@ -70,8 +70,9 @@ function addData(element, newCard) {
 		newSubRegion = `${element.subregion}`,
 		newTopDomain = `${element.tld[0]}`,
 		newCurrency = countryCurrency,
-		newLanguage = languageList.join(" "),
+		newLanguage = languageList,
 		newBorders = countryBorder;
+
 	// ! ---------------------
 
 	newCard.setAttribute("data-nativeName", newNativeName);
@@ -90,6 +91,7 @@ async function getRegion(url) {
 
 	data.forEach((eachData) => {
 		cardCreator(eachData);
+		console.log(eachData);
 	});
 }
 
@@ -137,7 +139,7 @@ function enter(event) {
 searchIcon.addEventListener("click", getName);
 searchInput.addEventListener("keydown", enter);
 
-//! PREVIEW CARD =================================================================================
+//! PREVIEW CARD =========================================================
 
 const searchNav = document.querySelector(".search-nav");
 const container = document.querySelector(".container");
@@ -238,7 +240,7 @@ function back(button, currentContainer) {
 	});
 }
 
-//! Dark Mode ====================================================================================
+//! Dark Mode =====================================================
 
 const darkMode = document.querySelector(".dark-mode");
 
