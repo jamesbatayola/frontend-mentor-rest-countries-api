@@ -202,9 +202,9 @@ function previewCard(eachCard) {
 										<footer class="card-details-footer">
 											<h2 class="footer-heading text">Border Countries:</h2>
 											<div class="borders-container">
-												<div class="borders-item border-1 theme-changeable"><p class="text">N / A</p></div>
-												<div class="borders-item border-2 theme-changeable"><p class="text">N / A</p></div>
-												<div class="borders-item border-3 theme-changeable"><p class="text">N / A</p></div>
+												<div class="borders-item border-1 theme-changeable"><p class="text">n / a</p></div>
+												<div class="borders-item border-2 theme-changeable"><p class="text">n / a</p></div>
+												<div class="borders-item border-3 theme-changeable"><p class="text">n / a</p></div>
 											</div>
 										</footer>
 									</section>
